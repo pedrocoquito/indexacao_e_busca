@@ -13,7 +13,7 @@ def h(palavra, tamanho_tabela):
         valor_hash = valor_hash * 31 + ord(c)
     return valor_hash%tamanho_tabela
 
-def inserir(tabela, doc, doc_id): 
+def inserir(tabela, doc, doc_id): #Função para inserir as palavras na estrutura
     tamanho = len(tabela)
     for p in doc:
         pos = h(p, tamanho)
@@ -34,7 +34,7 @@ def inserir(tabela, doc, doc_id):
         termo.lista = novo_item
     return tabela
 
-def salvar_indice(tabela, lista_documentos):
+def salvar_indice(tabela, lista_documentos): #Função para salvar o conteúdo no arquivo txt
     print('\n Salvando índice no arquivo \n')
     arquivo = open('indice_hash.txt', 'w')
     tamanho = len(tabela)
@@ -62,7 +62,7 @@ def salvar_indice(tabela, lista_documentos):
     for i in range(0, quantidade):
         arquivo.write(lista_documentos[i][0] + '\n' + str(lista_documentos[i][1]) + '\n' + lista_documentos[i][2] + '\n')
 
-def carregar_indice(): 
+def carregar_indice(): #Função para carregar o arquivo txt para memória
     print('Carregando arquivo...')
     arquivo = open("indice_hash.txt", 'r')
     tamanho_tabela = int(arquivo.readline())
@@ -84,7 +84,7 @@ def carregar_indice():
         documentos.append((endereco, termos_distintos, titulo_resumo))
     return tabela, documentos
 
-def busca(tabela, documentos, busca): 
+def busca(tabela, documentos, busca): #Função para retornar busca no console de acordo com termos inseridos pelo usuário
     tamanho = len(tabela)
     relevancia = dict()
     for termo in busca:

@@ -6,14 +6,15 @@ class no:
         self.caracter = p
         self.lista_filhos = [None] * 36
         self.lista = l
-    
-def indice(caracter):
+#Função para retornar um valor do caracter baseado na tabela ascii, só que começando pelos números e depois as letras esses terão valores iniciados em 1,
+#diferente da tabela que estes começam em 48
+def indice(caracter):  
     valor_ascii = ord(caracter)
     if valor_ascii < 97:
         return valor_ascii - 48
     return valor_ascii - 87
 
-def inserir(raiz_arvore, doc, doc_id): 
+def inserir(raiz_arvore, doc, doc_id):  #Função para inserir as palavras na estrutura
     for p in doc:
         ponteiro = raiz_arvore
         for c in p:
@@ -25,7 +26,7 @@ def inserir(raiz_arvore, doc, doc_id):
         ponteiro.lista = novo_item
     return raiz_arvore
 
-def arvore_para_lista(raiz_arvore):
+def arvore_para_lista(raiz_arvore): #Função para transformar árvore em lista pra facilitar a escrita e depois a leitura no arquivo txt
     if raiz_arvore is None:
         return [('#', None)]
     lista = []
@@ -34,7 +35,7 @@ def arvore_para_lista(raiz_arvore):
         lista.extend(arvore_para_lista(f))
     return lista
 
-def lista_para_arvore(lista, pos):
+def lista_para_arvore(lista, pos): #Função para transformar a lista armazenada no txt em uma árvore
     if pos[0] == len(lista):
         return None
     if lista[pos[0]][0] == '#':
@@ -46,7 +47,7 @@ def lista_para_arvore(lista, pos):
         arvore.lista_filhos[i] = lista_para_arvore(lista, pos)
     return arvore
 
-def salvar_indice(raiz_arvore, lista_documentos):
+def salvar_indice(raiz_arvore, lista_documentos): #Função para salvar o conteúdo no arquivo txt
     print('\n Salvando índice no arquivo \n')
     arquivo = open('indice_trie.txt', 'w')
     lista = arvore_para_lista(raiz_arvore)
@@ -67,7 +68,7 @@ def salvar_indice(raiz_arvore, lista_documentos):
     for i in range(0, quantidade):
         arquivo.write(lista_documentos[i][0] + '\n' + str(lista_documentos[i][1]) + '\n' + lista_documentos[i][2] + '\n')
 
-def carregar_indice(): 
+def carregar_indice(): #Função para carregar o arquivo txt para memória
     print('Carregando arquivo...')
     arquivo = open("indice_trie.txt", 'r')
     quantidade_nos = int(arquivo.readline())
@@ -89,7 +90,7 @@ def carregar_indice():
         documentos.append((endereco, termos_distintos, titulo_resumo))
     return lista_para_arvore(lista, [0]), documentos
 
-def busca(raiz_arvore, documentos, busca): 
+def busca(raiz_arvore, documentos, busca): #Função para retornar busca no console de acordo com termos inseridos pelo usuário
     relevancia = dict()
     for termo in busca:
         contador = 0

@@ -5,6 +5,9 @@ import trie
 
 tamanho_tabela = 10000
 
+### Função responsável em tratas as informações do arquivo JSON e indexar de acordo com a estrutura selecionada e chamando a função salvar_indice
+### será gerado um arquivo txt com os documentos indexados
+
 def indexar_arquivo(escolha):
     if escolha == 1:
         tabela = [None] * tamanho_tabela

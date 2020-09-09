@@ -3,3 +3,6 @@ class no_lista:
         self.count = c
         self.doc_id = d
         self.prox = p
+
+
+### Classe do tipo nó que é utilizada nas estruturas trie e hash_table
